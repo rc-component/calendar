@@ -23,7 +23,6 @@
     "@kadira/storybook": "^1.28.1",
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",
-    "babel-runtime": "^6.9.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.9.0",
     "babel-polyfill": "^6.9.0",
@@ -31,35 +30,44 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-preset-stage-2": "^6.5.0",
+    "babel-runtime": "^6.9.0",
+    "bell-on-bundler-error-plugin": "^1.0.8",
     "css-loader": "^0.23.1",
+    "express": "^4.13.4",
     "git-url-parse": "^6.0.3",
     "jsdom": "^9.2.0",
     "mocha": "^2.5.3",
     "postcss-cssnext": "^2.5.2",
     "postcss-loader": "^0.9.1",
-    "style-loader": "^0.13.1",
     "raw-loader": "^0.5.1",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
     "sinon": "^1.17.4",
-    "webpack": "^1.13.1"
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
     "calendar": "^0.1.0",
     "class-transit": "0.0.2",
     "classnames": "^2.2.5",
     "component-classes": "^1.2.6",
+    "ontap": "^0.1.1",
+    "radio-component": "0.0.2",
     "rc-iscroll": "0.0.7",
-    "rc-swipe": "^0.1.7",
+    "rc-swipe": "^0.2.0",
     "react": "^15.1.0",
     "react-addons-transition-group": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-tap-or-click": "^0.1.0"
   },
   "main": "dist/index.js",
   "engines": {
     "npm": "^3.0.0"
   },
   "browser": {
-    "classes": "component-classes"
+    "classes": "component-classes",
+    "radio": "radio-component"
   }
 }
