@@ -238,6 +238,7 @@ export default class Calendar extends Component {
           if (state.view !== 'date') {
             <MonthYear
               onShow={idx => {
+                if (this.state.view === 'date') return
                 if (idx === 0) this.setState({view: 'month'})
                 if (idx === 1) this.setState({view: 'year'})
               }}
