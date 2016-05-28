@@ -26,7 +26,7 @@ Build with [webpack](https://webpack.github.io/) and [CSS Modules](https://githu
 name   | type   | default    | description
 -------| ------ | ---------- | ------------
 select | Date   | new Date() | Default current date
-locale | String/Object | 'en-US'    | Locale for day and month, support `en-US` and `zh-CN`
+locale | String/Object | 'en-US'    | Locale for day and month, support `en-US` and `zh-CN` or Object contains `days` and `months`
 minDate | Date  | new Date() | Minimal date, default ucrrent date
 *maxDate  | Date |           | Maximal date
 *onSelect | func | null      | callback function on user select
