@@ -1,7 +1,7 @@
 {
   "name": "rc-minicalendar",
-  "version": "0.0.1",
-  "description": "Overlay Component",
+  "version": "0.0.4",
+  "description": "Responsive and simpilified calendar component",
   "repository": {
     "type": "git",
     "url": "https://github.com/rc-component/calendar.git"
@@ -45,16 +45,13 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "absoluty": "0.0.3",
     "calendar": "^0.1.0",
     "class-transit": "0.0.2",
     "classnames": "^2.2.5",
     "component-classes": "^1.2.6",
-    "component-raf": "^1.2.0",
     "rc-iscroll": "0.0.7",
     "rc-swipe": "^0.1.7",
     "react": "^15.1.0",
-    "react-addons-css-transition-group": "^15.1.0",
     "react-addons-transition-group": "^15.1.0",
     "react-dom": "^15.1.0"
   },
@@ -63,7 +60,6 @@
     "npm": "^3.0.0"
   },
   "browser": {
-    "raf": "component-raf",
     "classes": "component-classes"
   }
 }
