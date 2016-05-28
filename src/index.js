@@ -22,7 +22,7 @@ const FirstChild = React.createClass({
 
 const Head = function (props) {
   return (
-    <div style={{textAlign: 'center', padding: '0 4px'}}>
+    <div className={style.head}>
       <div style={{['float']: 'left'}}>
         <a href="#" onClick={props.onPrev}>←</a>
       </div>
