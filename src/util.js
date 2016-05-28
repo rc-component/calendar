@@ -17,3 +17,13 @@ export function relativeMonth(curr, relative) {
     month: d.getMonth()
   }
 }
+export function getYears(minDate, maxDate) {
+  let start = minDate.getFullYear()
+  let end = maxDate.getFullYear()
+  let res = []
+  for (let i = start; i <= end ; i++) {
+    res.push(i)
+  }
+  return res
+}
+

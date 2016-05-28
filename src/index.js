@@ -1,17 +1,16 @@
+import TransitionGroup from 'react-addons-transition-group'
 import React, { Component, PropTypes } from 'react'
 import ReactDom from 'react-dom'
 import style from './style.css'
 import cx from 'classnames'
 import Cal from 'calendar'
 import locale from './locale'
-import TransitionGroup from 'react-addons-transition-group'
 import {pad, relativeMonth} from './util'
-import Year from './year'
-import Month from './month'
 import Swipe from 'rc-swipe'
 import classes from 'classes'
 import ontap from 'ontap'
 import tapOrClick from 'react-tap-or-click'
+import MonthYear from './monthyear'
 
 const cal = new Cal.Calendar()
 
@@ -235,28 +234,26 @@ export default class Calendar extends Component {
           }
         }}
         <TransitionGroup component={FirstChild}>
-          {do {
-            if (state.view == 'year') {
-              <Year year={state.year} minDate={props.minDate} maxDate={props.maxDate}
-              width={this.width} height={this.height}
-              onSelect={(year) => {
-                this.setState({
-                  year: year,
-                  view: 'date'
-                })
-              }}/>
-            }
-            else if (state.view == 'month') {
-              <Month month={state.month}
-                months={abbr_months}
-                onSelect={(n) => {
-                  this.setState({
-                    month: n,
-                    view: 'date'
-                  })
-                }}/>
-            }
-          }}
+        {do {
+          if (state.view !== 'date') {
+            <MonthYear
+              onShow={idx => {
+                if (idx === 0) this.setState({view: 'month'})
+                if (idx === 1) this.setState({view: 'year'})
+              }}
+              onMonth={month => {this.setState({month, view: 'date'})}}
+              view={state.view}
+              onYear={year => {this.setState({year, view: 'date'})}}
+              minDate={props.minDate}
+              maxDate={props.maxDate}
+              width={this.width}
+              height={this.height}
+              year={state.year}
+              month={state.month}
+              months={abbr_months}
+            />
+          }
+        }}
         </TransitionGroup>
         {props.children}
       </div>

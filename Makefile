@@ -1,6 +1,6 @@
 example:
 	@chrome http://localhost:3000
-	@node-dev example/server.js
+	@cd example && node-dev server.js
 
 dev:
 	@chrome http://localhost:9010
@@ -9,4 +9,4 @@ dev:
 doc:
 	@npm run publish-storybook
 
-.PHONY: dev
+.PHONY: dev example dev
