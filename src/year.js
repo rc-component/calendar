@@ -2,6 +2,8 @@ import React from 'react'
 import style from './style.css'
 import Animate from './animate'
 import Iscroll from 'rc-iscroll'
+import ontap from 'ontap'
+import radio from 'radio'
 
 function getYears(minDate, maxDate) {
   let start = minDate.getFullYear()
@@ -19,6 +21,18 @@ export default class Year extends Animate {
     this.years = getYears(props.minDate, props.maxDate)
     this.handlebar = this.years.length >= 15
   }
+  componentDidMount() {
+    super.componentDidMount()
+    this.ontap = ontap(this.el, e => {
+      if (e.target.tagName.toLowerCase() == 'li') {
+        radio(e.target, style.selected)
+        this.props.onSelect(Number(e.target.textContent))
+      }
+    })
+  }
+  componentWillUnmount() {
+    this.ontap.unbind()
+  }
   render () {
     let props = this.props
     return (
@@ -26,9 +40,7 @@ export default class Year extends Animate {
         <ul>
           {this.years.map(function (year) {
             let clz = year == props.year ? style.selected : ''
-            return <li key={year} className={clz} onClick={() => {
-              props.onSelect(year)
-            }}>{year}</li>
+            return <li key={year} className={clz}>{year}</li>
           })}
         </ul>
       </Iscroll>

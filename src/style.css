@@ -60,9 +60,9 @@
 .calendar a.invalid {
   color: #e5e5e5;
 }
-.months .selected,
+.calendar .months li.selected,
 .calendar a.selected,
-.years li.selected {
+.calendar .years li.selected {
   background: #1187E4;
   color: #FFF;
 }

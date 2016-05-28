@@ -10,6 +10,8 @@ import Year from './year'
 import Month from './month'
 import Swipe from 'rc-swipe'
 import classes from 'classes'
+import ontap from 'ontap'
+import tapOrClick from 'react-tap-or-click'
 
 const cal = new Cal.Calendar()
 
@@ -21,15 +23,16 @@ const FirstChild = React.createClass({
 })
 
 const Head = function (props) {
+  let href = 'javascript: void(0)'
   return (
     <div className={style.head}>
       <div style={{['float']: 'left'}}>
-        <a href="#" onClick={props.onPrev}>←</a>
+        <a href={href} {...tapOrClick(props.onPrev)}>←</a>
       </div>
-      <a href="#" onClick={props.onMonth}>{props.month}</a>
-      <a href="#" onClick={props.onYear}>{props.year}</a>
+      <a href={href} {...tapOrClick(props.onMonth)}>{props.month}</a>
+      <a href={href} {...tapOrClick(props.onYear)}>{props.year}</a>
       <div style={{['float']: 'right'}}>
-        <a href="#" onClick={props.onNext}>→</a>
+        <a href={href} {...tapOrClick(props.onNext)}>→</a>
       </div>
     </div>
   )
@@ -46,15 +49,11 @@ const Days = function (props) {
 }
 
 const Day = function (props) {
-  let onSelect = (e) => {
-    e.preventDefault()
-    if (classes(e.target).has(style.invalid)) return
-    let date = props.date
-    props.onSelect(date.year, date.month, date.date)
-  }
+  let date = props.date
+  let str = `${date.year}-${pad(date.month+1)}-${pad(date.date)}`
   return (
     <td>
-      <a className={props.className} onClick={onSelect}>{props.children}</a>
+      <a className={props.className} data-date={str}>{props.children}</a>
     </td>
   )
 }
@@ -68,6 +67,7 @@ const Dates = function (props) {
   let selected = props.curr
   let min = props.minDate.getTime()
   let max = props.maxDate.getTime()
+  let hasSelect = (props.year == selected.year && props.month == selected.month)
   return (
     <table>
       <tbody>
@@ -90,14 +90,13 @@ const Dates = function (props) {
               }
               let d = (new Date(date.year, date.month, date.date)).getTime()
               let clz = cx({
-                [style.selected]: selected.year == date.year && selected.month == date.month && selected.date == date.date,
+                [style.selected]: hasSelect && !isPrev && !isNext && n == selected.date,
                 [style.invalid]: d < min || d > max,
                 [style.prev]: isPrev,
                 [style.next]: isNext
               })
               let key = `${date.year}-${pad(date.month+1)}-${pad(date.date)}`
-              return <Day className={clz} date={date} key={key}
-                onSelect={props.onSelect}>{n}</Day>
+              return <Day className={clz} date={date} key={key}>{n}</Day>
             })}
           </tr>
           )
@@ -144,6 +143,20 @@ export default class Calendar extends Component {
   }
   componentDidMount() {
     this.setBounding()
+    let el = ReactDom.findDOMNode(this)
+    this.ontap = ontap(el, e => {
+      let cls = classes(e.target)
+      if (cls.has(style.invalid)) return
+      let str = e.target.getAttribute('data-date')
+      if (str) {
+        e.preventDefault()
+        let d = new Date(str)
+        this.onSelect(d.getFullYear(), d.getMonth(), d.getDate())
+      }
+    })
+  }
+  componentWillUnmount() {
+    this.ontap.unbind()
   }
   componentDidUpdate() {
     this.setBounding()
@@ -189,7 +202,7 @@ export default class Calendar extends Component {
       <Dates days={this.locale.days} month={month}
         minDate={props.minDate} maxDate={props.maxDate}
         year={year} key={`${year}-${pad(month + 1)}`}
-        curr={this.selected} onSelect={::this.onSelect} />
+        curr={this.selected}/>
     )
   }
   render() {
