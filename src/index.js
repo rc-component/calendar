@@ -40,9 +40,9 @@ const Head = function (props) {
 const Days = function (props) {
   return (
     <tr className={style.days}>
-      {props.days.map((d, i) => {
-        return <td key={i}>{d}</td>
-      })}
+    {props.days.map((d, i) => {
+      return <td key={i}>{d}</td>
+    })}
     </tr>
   )
 }
@@ -74,7 +74,7 @@ const Dates = function (props) {
         {all_dates.map((arr, idx, dates) => {
           let l = dates.length
           return (
-          <tr key={idx}>
+            <tr key={idx}>
             {arr.map(n => {
               n = Number(n)
               let isPrev = idx === 0 && n > 7
@@ -97,7 +97,7 @@ const Dates = function (props) {
               let key = `${date.year}-${pad(date.month+1)}-${pad(date.date)}`
               return <Day className={clz} date={date} key={key}>{n}</Day>
             })}
-          </tr>
+            </tr>
           )
         })}
       </tbody>
@@ -229,11 +229,11 @@ export default class Calendar extends Component {
               if (n === 0) this.iterate(false, false)
               if (n === 2) this.iterate(true, false)
             }}>
-              {date_children}
+            {date_children}
             </Swipe>
           }
         }}
-        <TransitionGroup component={FirstChild}>
+      <TransitionGroup component={FirstChild}>
         {do {
           if (state.view !== 'date') {
             <MonthYear
